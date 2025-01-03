@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>haohederWeb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffedf2;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+
+        .navbar-left h1 {
+            margin: 0;
+        }
+
+        .navbar-right a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .navbar-right a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 100px 20px;
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ffa1bb;
+            max-width: 1200px; /* 限制最大寬度 */
+            margin: 60px auto; /* 自動水平居中 */
+            border-radius: 10px; /* 可選：為區塊添加圓角 */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 可選：添加陰影效果 */
+        }
+
+        .calendar-section {
+            padding: 0px 0;
+        }
+
+        .calendar-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-links a {
+            margin: 0 10px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .calendar-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .calendar-links a[data-color="#ff9aa2"] { background-color: #ff9aa2; }
+        .calendar-links a[data-color="#ffb7b2"] { background-color: #ffb7b2; }
+        .calendar-links a[data-color="#ffdac1"] { background-color: #ffdac1; }
+        .calendar-links a[data-color="#e2f0cb"] { background-color: #e2f0cb; }
+        .calendar-links a[data-color="#b5ead7"] { background-color: #b5ead7; }
+        .calendar-links a[data-color="#c7ceea"] { background-color: #c7ceea; }
+        .calendar-links a[data-color="#d5a6bd"] { background-color: #d5a6bd; }
+        .calendar-links a[data-color="#ffe4e1"] { background-color: #ffe4e1; }
+        .calendar-links a[data-color="#ffccb6"] { background-color: #ffccb6; }
+        .calendar-links a[data-color="#d5e1df"] { background-color: #d5e1df; }
+        .calendar-links a[data-color="#ece4db"] { background-color: #ece4db; }
+        .calendar-links a[data-color="#f9d5e5"] { background-color: #f9d5e5; }
+
+        .calendar-content img {
+            max-width: 80%; /* 縮小圖片寬度，設置為容器寬度的 80% */
+            height: auto; /* 確保圖片比例不變 */
+            display: block; /* 將圖片設定為區塊元素 */
+            margin: 20px auto; /* 水平置中，並添加垂直間距 */
+            border-radius: 10px; /* 添加圓角（可選） */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果（可選） */
+        }
+
+        .works-section,
+        .videos-section,
+        .photos-section {
+            padding: 50px 0;
+        }
+
+        .work-item,
+        .video-item,
+        .photo-item {
+            text-align: left; /* 將整個項目設置為靠左對齊 */
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 確保子元素靠左對齊 */
+        }
+
+        .work-title,
+        .video-title,
+        .photo-title {
+            background-color: #ff759b; /* 設定底色 */
+            color: white; /* 設定文字顏色 */
+            padding: 10px 20px; /* 添加內邊距 */
+            border-radius: 5px; /* 添加圓角效果 */
+            text-align: left; /* 文字居中 */
+            max-width: auto; /* 限制標題寬度 */
+            margin: 0 0 15px; /* 與圖片保持間距，且水平居中 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+        }
+
+        img, video {
+            width: 100%;
+            max-width: 600px;
+            display: block;
+        }
+
+        .video-description,
+        .photo-description,
+        .photo-description {
+            margin-top: 10px;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+        }
+
+        .footer-item {
+            text-align: center;
+        }
+
+        .footer-item img {
+            width: 100px; /* 設定圖片的固定寬度 */
+            height: 100px; /* 設定圖片的固定高度，保持正方形 */
+            border-radius: 50%; /* 設定圖片為圓形 */
+            object-fit: cover; /* 確保圖片內容適合容器 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果（可選） */
+            transition: transform 0.2s ease; /* 添加縮放效果 */
+        }
+
+        .footer-item img:hover {
+            transform: scale(1.1); /* 當滑鼠懸停時圖片放大 */
+        }
+
+        .footer-item p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 頂部選單 -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <h1>賢的網站</h1>
+        </div>
+        <div class="navbar-right">
+            <a href="#calendar">工作日曆</a>
+            <a href="#works">作品</a>
+            <a href="#videos">影片</a>
+            <a href="#photos">照片</a>
+        </div>
+    </header>
+
+    <!-- 工作日曆區塊 -->
+    <section id="calendar" class="calendar-section">
+        <div class="calendar-links">
+            <a href="#january" data-color="#ff9aa2">一月</a>
+            <a href="#february" data-color="#ffb7b2">二月</a>
+            <a href="#march" data-color="#ffdac1">三月</a>
+            <a href="#april" data-color="#e2f0cb">四月</a>
+            <a href="#may" data-color="#b5ead7">五月</a>
+            <a href="#june" data-color="#c7ceea">六月</a>
+            <a href="#july" data-color="#d5a6bd">七月</a>
+            <a href="#august" data-color="#ffe4e1">八月</a>
+            <a href="#september" data-color="#ffccb6">九月</a>
+            <a href="#october" data-color="#d5e1df">十月</a>
+            <a href="#november" data-color="#ece4db">十一月</a>
+            <a href="#december" data-color="#f9d5e5">十二月</a>
+        </div>
+        <div class="calendar-content">
+            <a id="january"></a>
+            <img src="IMG\club.png" alt="一月日曆">
+            <a id="february"></a>
+            <img src="IMG\loading.png" alt="二月日曆" style="display:none;">
+            <a id="march"></a>
+            <img src="IMG\loading.png" alt="三月日曆" style="display:none;">
+            <a id="april"></a>
+            <img src="IMG\loading.png" alt="四月日曆" style="display:none;">
+            <a id="may"></a>
+            <img src="IMG\loading.png" alt="五月日曆" style="display:none;">
+            <a id="june"></a>
+            <img src="IMG\loading.png" alt="六月日曆" style="display:none;">
+            <a id="july"></a>
+            <img src="IMG\loading.png" alt="七月日曆" style="display:none;">
+            <a id="august"></a>
+            <img src="IMG\loading.png" alt="八月日曆" style="display:none;">
+            <a id="september"></a>
+            <img src="IMG\loading.png" alt="九月日曆" style="display:none;">
+            <a id="october"></a>
+            <img src="IMG\loading.png" alt="十月日曆" style="display:none;">
+            <a id="november"></a>
+            <img src="IMG\loading.png" alt="十一月日曆" style="display:none;">
+            <a id="december"></a>
+            <img src="IMG\loading.png" alt="十二月日曆" style="display:none;">
+        </div>
+    </section>
+
+    <!-- 作品區塊 -->
+    <section id="works" class="works-section">
+        <div class="work-item">
+            <h3 class="work-title">她很可愛給大家看看</h3>
+            <img src="IMG\cat.png" alt="作品圖像">
+        </div>
+        <!-- 更多作品項目 -->
+    </section>
+
+    <!-- 影片區塊 -->
+    <section id="videos" class="videos-section">
+        <div class="video-item">
+            <h3 class="video-title">單鍵點擊遊戲</h3>
+            <video controls>
+                <source src="IMG\gamefortest.mp4" type="video/mp4">
+                你的瀏覽器不支援影片播放
+            </video>
+            <p class="video-description">影片介紹</p>
+        </div>
+        <!-- 更多影片項目 -->
+    </section>
+
+    <!-- 照片區塊 -->
+    <section id="photos" class="photos-section">
+        <div class="photo-item">
+            <h3 class="photo-title">表演妝設計</h3>
+            <img src="IMG\74.jpg" alt="照片">
+            <p class="photo-description">他是其哲</p>
+        </div>
+        <!-- 更多照片項目 -->
+    </section>
+
+    <!-- 底部區塊 -->
+    <footer class="footer">
+        <div class="footer-item">
+            <a href="https://wangguanting.github.io/WebHomework/" target="_blank">
+                <img src="IMG\FireStick.jpg" alt="連結1">
+            </a>
+            <p>著火杆杆工作室</p>
+        </div>
+        <div class="footer-item">
+            <a href="https://x.com/haoheder_tuna?t=mYRiPPJMDnJALzr_JPWkrQ&s=09" target="_blank">
+                <img src="IMG\twitter.png" alt="連結2">
+            </a>
+            <p>我的Twitter是Twitter不是X</p>
+        </div>
+    </footer>
+
+    <script>
+        // 書籤切換顯示對應月份的日曆圖片
+        const calendarLinks = document.querySelectorAll('.calendar-links a');
+        const calendarImages = document.querySelectorAll('.calendar-content img');
+        const calendarSection = document.querySelector('.calendar-section');
+
+        calendarLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                // 隱藏所有日曆圖片
+                calendarImages.forEach(img => img.style.display = 'none');
+                // 顯示點選的月份的日曆圖片
+                const targetId = link.getAttribute('href').substring(1);
+                document.querySelector(`a[id="${targetId}"] + img`).style.display = 'block';
+
+                // 更改日曆區塊顏色
+                const newColor = link.getAttribute('data-color');
+                calendarSection.style.backgroundColor = newColor;
+            });
+        });
+    </script>
+</body>
+</html>
